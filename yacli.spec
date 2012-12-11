@@ -3,7 +3,7 @@
 
 Name:           yacli
 Version:        0.2.3
-Release:        %mkrel 0.0.4
+Release:        0.0.5
 Epoch:          0
 Summary:        org.freecompany.util
 License:        MIT
@@ -23,7 +23,6 @@ BuildRequires:  java-gcj-compat-devel
 BuildRequires:  java-devel
 BuildArch:      noarch
 %endif
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 org.freecompany.util
@@ -46,22 +45,17 @@ export OPT_JAR_LIST="ant/ant-junit"
 %{ant} jar javadoc test
 
 %install
-%{__rm} -rf %{buildroot}
-
 %{__mkdir_p} %{buildroot}%{_javadir}
 %{__cp} -a dist/%{name}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
 (cd %{buildroot}%{_javadir} && for jar in *-%{version}*; do %{__ln_s} ${jar} ${jar/-%{version}/}; done)
 
 %{__mkdir_p} %{buildroot}%{_javadocdir}/%{name}-%{version}
-%{__cp} -a dist/doc/* %{buildroot}%{_javadocdir}/%{name}-%{version}
+cp -pr dist/doc/* %{buildroot}%{_javadocdir}/%{name}-%{version}/
 %{__ln_s} %{name}-%{version} %{buildroot}%{_javadocdir}/%{name}
 
 %if %{gcj_support}
 %{_bindir}/aot-compile-rpm
 %endif
-
-%clean
-%{__rm} -rf %{buildroot}
 
 %if %{gcj_support}
 %post
@@ -85,3 +79,30 @@ export OPT_JAR_LIST="ant/ant-junit"
 %defattr(0644,root,root,0755)
 %doc %{_javadocdir}/%{name}-%{version}
 %doc %{_javadocdir}/%{name}
+
+
+%changelog
+* Wed Sep 09 2009 Thierry Vignaud <tvignaud@mandriva.com> 0:0.2.3-0.0.4mdv2010.0
++ Revision: 435329
+- rebuild
+
+* Fri Dec 21 2007 Olivier Blin <oblin@mandriva.com> 0:0.2.3-0.0.3mdv2009.0
++ Revision: 136631
+- restore BuildRoot
+
+  + Thierry Vignaud <tvignaud@mandriva.com>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Sun Dec 16 2007 Anssi Hannula <anssi@mandriva.org> 0:0.2.3-0.0.3mdv2008.1
++ Revision: 121065
+- buildrequire java-rpmbuild, i.e. build with icedtea on x86(_64)
+
+* Sat Sep 15 2007 Anssi Hannula <anssi@mandriva.org> 0:0.2.3-0.0.2mdv2008.0
++ Revision: 87325
+- rebuild to filter out autorequires of GCJ AOT objects
+- remove unnecessary Requires(post) on java-gcj-compat
+
+* Tue Aug 07 2007 David Walluck <walluck@mandriva.org> 0:0.2.3-0.0.1mdv2008.0
++ Revision: 59603
+- Import yacli
+
