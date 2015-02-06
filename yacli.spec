@@ -3,7 +3,7 @@
 
 Name:           yacli
 Version:        0.2.3
-Release:        0.0.5
+Release:        0.0.6
 Epoch:          0
 Summary:        org.freecompany.util
 License:        MIT
