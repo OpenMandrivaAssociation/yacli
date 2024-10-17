@@ -8,7 +8,7 @@ Epoch:          0
 Summary:        org.freecompany.util
 License:        MIT
 Group:          Development/Java
-URL:            http://www.freecompany.org/
+URL:            https://www.freecompany.org/
 # svn export https://svn.freecompany.org/public/util/tags/yacli-0.2.3
 # zip -9r yacli-src-0.2.3.zip yacli-0.2.3
 Source0:        http://repository.freecompany.org/org/freecompany/yacli/zips/yacli-src-%{version}.zip
